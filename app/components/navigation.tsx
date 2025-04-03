@@ -30,11 +30,13 @@ export default function Navigation() {
       {/* mobile menu */}
       <motion.div
         layout
+        initial={{ translateX: '200%', pointerEvents: 'none', opacity: 0 }}
         transition={{ duration: 0.5 }}
         className="fixed top-0 left-0 w-dvw h-dvh bg-cream z-10 flex flex-col justify-end items-center lg:hidden"
         animate={{
           translateX: isOpen ? 0 : '200%',
           pointerEvents: isOpen ? 'auto' : 'none',
+          opacity: 1,
         }}
       >
         <ul className="flex flex-col gap-16 items-center mb-20">

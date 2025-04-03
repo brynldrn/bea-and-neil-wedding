@@ -35,6 +35,26 @@ const sftSerif = localFont({
       path: '../public/fonts/SFTSchriftedSerifTRIALD-Bd.woff',
       weight: '700',
       style: 'normal'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSerifTRIALD-It.woff',
+      weight: '400',
+      style: 'italic'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSerifTRIALD-Lt-It.woff',
+      weight: '300',
+      style: 'italic'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSerifTRIALD-Md-It.woff',
+      weight: '500',
+      style: 'italic'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSerifTRIALD-Bd-It.woff',
+      weight: '700',
+      style: 'italic'
     }
   ],
   variable: '--font-sft-serif',

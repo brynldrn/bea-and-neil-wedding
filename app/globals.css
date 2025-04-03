@@ -5,6 +5,7 @@
   --foreground: #171717;
   --cream: #F7F2DF;
   --dark-green: #516138;
+  --off-white: #EBE6C9;
 }
 
 @theme inline {
@@ -16,10 +17,11 @@
   --hero-position: 57%;
   --color-cream: var(--cream);
   --color-dark-green: var(--dark-green);
+  --color-off-white: var(--off-white);
 }
 
 body {
-  background: var(--background);
+  background: var(--cream);
   color: var(--foreground);
 }
 
