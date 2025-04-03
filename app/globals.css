@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --cream: #F7F2DF;
+  --dark-green: #516138;
 }
 
 @theme inline {
@@ -12,6 +14,8 @@
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-sft-serif);
   --hero-position: 57%;
+  --color-cream: var(--cream);
+  --color-dark-green: var(--dark-green);
 }
 
 body {
