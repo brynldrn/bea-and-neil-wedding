@@ -1,3 +1,4 @@
+import Carousel from "./components/carousel";
 import Hero from "./components/hero";
 import TwoUp from "./components/two-up";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <Hero />
       <TwoUp />
+      <Carousel />
       <section className="p-10" id="details">
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis voluptatum quo quibusdam nam nemo, neque enim, perspiciatis velit repellendus dolorem voluptates, harum illum molestiae libero quos eos quam odit eaque.

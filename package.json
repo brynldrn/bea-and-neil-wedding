@@ -11,6 +11,11 @@
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "embla-carousel": "^8.5.2",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-class-names": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
     "motion": "^12.6.3",
     "next": "15.2.4",
     "react": "^19.0.0",
