@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.1",
     "motion": "^12.6.3",
     "next": "15.2.4",
