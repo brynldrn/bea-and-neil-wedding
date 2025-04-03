@@ -10,13 +10,13 @@ export default function Navigation() {
     <nav className="justify-between items-center flex p-8 absolute top-0 left-0 bg-transparent z-40 w-full lg:pt-10 lg:px-16">
       {/* left-side menu */}
       <div className="hidden lg:flex flex-col gap-6 items-start">
-        <Link href='/' className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">OUR STORY</Link>
-        <Link href='/' className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">DETAILS</Link>
+        <Link href='#our-story' scroll className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">OUR STORY</Link>
+        <Link href='#details' scroll className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">DETAILS</Link>
       </div>
 
       {/* logo */}
-      <Link href="/" className="size-[44px] lg:size-[80px] relative flex items-center justify-center">
-        <Image src={logo} fill objectFit='fill' alt="Home" className="w-fit h-fit" />
+      <Link href="#top" scroll className="size-[44px] lg:size-[80px] relative flex items-center justify-center">
+        <Image src={logo} fill alt="Home" className="w-fit h-fit" />
       </Link>
 
       {/* menu */}
@@ -26,8 +26,8 @@ export default function Navigation() {
 
       {/* right-side menu */}
       <div className="hidden lg:flex flex-col gap-6 items-end">
-        <Link href='/' className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">ATTIRE &amp; GIFTS</Link>
-        <Link href='/' className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">RSVP</Link>
+        <Link href='#attire-and-gifts' scroll className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">ATTIRE &amp; GIFTS</Link>
+        <Link href='#rsvp' scroll className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">RSVP</Link>
       </div>
     </nav>
   )
