@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Navigation from "./components/navigation";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -45,6 +41,33 @@ const sftSerif = localFont({
   display: 'swap'
 })
 
+const sftSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/SFTSchriftedSansTRIAL-Regular-BF6413e215a3cfa.woff',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSansTRIAL-Light-BF6413e215e5eb1.woff',
+      weight: '300',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSansTRIAL-Medium-BF6413e214dfec0.woff',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/SFTSchriftedSansTRIAL-Bold-BF6413e215ba51f.woff',
+      weight: '700',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-sft-sans',
+  display: 'swap'
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,8 +76,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sftSerif.variable} antialiased`}
+        className={`${geistMono.variable} ${sftSerif.variable} ${sftSans.variable} antialiased`}
       >
+        <Navigation />
         {children}
       </body>
     </html>
