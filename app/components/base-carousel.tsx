@@ -1,4 +1,3 @@
-// @ts-expect-error
 // @ts-nocheck
 
 'use client';
