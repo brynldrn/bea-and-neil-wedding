@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react'
 
 export default function Carousel() {
-  const [width, setWidth] = useState(0);
+  const [_width, setWidth] = useState(0);
   const carousel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,28 +22,6 @@ export default function Carousel() {
 
   return (
     <section>
-      {/* <div className='w-full overflow-hidden'>
-        <motion.div
-          ref={carousel}
-          drag='x'
-          whileDrag={{ scale: 0.95 }}
-          dragElastic={0.2}
-          dragConstraints={{ right: 0, left: -width }}
-          dragTransition={{ bounceDamping: 30 }}
-          transition={{ duration: 0.2, ease: 'easeInOut' }}
-          className='flex will-change-transform cursor-grab active:cursor-grabbing gap-4'
-        >
-          <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] max-h-[423px]'>
-            <Image src={slide01} fill alt='Slide 1' />
-          </motion.div>
-          <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] max-h-[423px]'>
-            <Image src={slide02} fill alt='Slide 2' />
-          </motion.div>
-          <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] max-h-[423px]'>
-            <Image src={slide03} fill alt='Slide 3' />
-          </motion.div>
-        </motion.div>
-      </div> */}
       <BaseCarousel className='bg-transparent sm:px-10 px-2' options={{
         loop: false
       }}>
