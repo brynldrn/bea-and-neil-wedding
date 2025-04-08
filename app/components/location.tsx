@@ -41,12 +41,12 @@ export default function Location() {
       </div>
 
       {/* flowers */}
-      <div className='hidden md:block absolute bottom-0 left-0 lg:-left-10 2xl:left-5'>
+      <div className='hidden md:block absolute bottom-0 left-0 lg:-left-10 2xl:left-3 2xl:rotate-6'>
         <div className='aspect-[310/549] h-[549px] w-[110px] lg:w-[310px] relative'>
           <Image src={flowerLeft} alt='flower' fill className='object-fill' />
         </div>
       </div>
-      <div className='hidden md:block absolute bottom-0 right-0 lg:-right-10 2xl:right-5'>
+      <div className='hidden md:block absolute bottom-0 right-0 lg:-right-10 2xl:right-0 2xl:-rotate-6'>
         <div className='aspect-[414/612] h-[612px] w-[214px] lg:w-[414px] relative'>
           <Image src={flowerRight} alt='flower' fill className='object-fill' />
         </div>
