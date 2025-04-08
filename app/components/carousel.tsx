@@ -51,7 +51,7 @@ export default function Carousel() {
           <span className='block mx-auto lg:mx-0 w-full text-center font-sans text-xl lg:w-auto'>Photo and video by Frame of Mind</span>
 
           {/* divider */}
-          <span className='block h-1 w-full bg-dark-green lg:w-1/3 xl:w-[607px]' />
+          <span className='block h-0.5 w-full bg-dark-green lg:w-1/3 xl:w-[607px]' />
 
           {/* carousel controls */}
           <div className='flex gap-2 items-center justify-center'>

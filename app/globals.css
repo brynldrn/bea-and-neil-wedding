@@ -6,7 +6,13 @@
   --cream: #F7F2DF;
   --dark-green: #516138;
   --off-white: #EBE6C9;
+  --bone-white: #F9F8F3;
   --light-green: #7D8E61;
+  --brown-1: #EAD7C6;
+  --brown-2: #E4D3D3;
+  --brown-3: #CDB6A4;
+  --green-1: #99A57F;
+  --green-2: #59683D;
 }
 
 @theme inline {
@@ -19,7 +25,14 @@
   --color-cream: var(--cream);
   --color-dark-green: var(--dark-green);
   --color-off-white: var(--off-white);
+  --color-bone-white: var(--bone-white);
   --color-light-green: var(--light-green);
+  --color-brown-1: var(--brown-1);
+  --color-brown-2: var(--brown-2);
+  --color-brown-3: var(--brown-3);
+  --color-green-1: var(--green-1);
+  --color-green-2: var(--green-2);
+
 }
 
 body {
