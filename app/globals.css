@@ -6,6 +6,7 @@
   --cream: #F7F2DF;
   --dark-green: #516138;
   --off-white: #EBE6C9;
+  --light-green: #7D8E61;
 }
 
 @theme inline {
@@ -18,6 +19,7 @@
   --color-cream: var(--cream);
   --color-dark-green: var(--dark-green);
   --color-off-white: var(--off-white);
+  --color-light-green: var(--light-green);
 }
 
 body {
