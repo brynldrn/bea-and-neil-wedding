@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
-import Navigation from "./components/navigation";
+import Navigation from "../components/navigation";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
