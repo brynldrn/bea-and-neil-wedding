@@ -10,7 +10,7 @@ import Image from 'next/image'
 export default function AttireAndGifts() {
   return (
     <section id="attire-and-gifts" className="py-16 bg-white flex flex-col gap-16">
-      <h1 className="font-serif text-dark-green font-light text-[40px] uppercase px-8 text-center tracking-[5px]">Attire &amp; Gifts</h1>
+      <h1 className="font-serif text-dark-green font-light text-[40px] uppercase px-8 text-center tracking-[5px] lg:text-[120px] xl:text-[150px]">Attire &amp; Gifts</h1>
 
       {/* details section */}
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-0 lg:justify-center lg:items-center">

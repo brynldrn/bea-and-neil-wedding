@@ -18,7 +18,7 @@ export default function Rsvp() {
 
   return (
     <section id="rsvp" className="p-8 bg-brown-4 flex flex-col gap-16 overflow-hidden lg:py-24">
-      <h1 className="font-serif text-cream font-light text-[100px] leading-[90%] tracking-[10px] text-center lg:text-[200px] xl:text-[400px] xl:tracking-[60px]">RSVP</h1>
+      <h1 className="font-serif text-cream font-light text-[100px] leading-[90%] tracking-[10px] text-center lg:text-[120px] xl:text-[400px] xl:tracking-[60px]">RSVP</h1>
 
       {/* details section */}
       <div className="block space-y-4 px-12 max-w-[839px] lg:mx-auto relative xl:pl-36 xl:pr-0">
