@@ -3,6 +3,8 @@
 import x from '@/public/icons/x.svg'
 import men from '@/public/icons/men.svg'
 import women from '@/public/icons/women.svg'
+import qr from '@/public/icons/QR.svg'
+import gifts from '@/public/images/gifts.png'
 import Image from 'next/image'
 
 export default function AttireAndGifts() {
@@ -89,6 +91,31 @@ export default function AttireAndGifts() {
           </div>
         </div>
       </div>
-    </section>
+
+      {/* gifts section */}
+      <div className='flex flex-col px-8 lg:flex-row lg:gap-0 lg:items-center lg:px-10 xl:px-24'>
+        <div className='flex gap-10 pl-16 flex-col relative before:absolute before:content-[""] before:w-[1px] before:h-full before:bg-dark-green before:left-8 before:top-3 lg:pl-0 lg:before:hidden xl:gap-16'>
+          <span className='font-serif text-dark-green italic text-[28px] lg:pr-8 lg:pt-16 xl:text-[40px] xl:pr-10 xl:pt-20'>
+            Your presence is the greatest gift we could ask for. However, if you&rsquo;d like to give something, we would appreciate a monetary gift.
+          </span>
+
+          {/* divider */}
+          <span className='hidden lg:block h-[1px] w-full bg-dark-green' />
+
+          {/* QR Group */}
+          <div className='flex flex-col gap-6 justify-start pr-8 pb-10 lg:flex-row lg:gap-4 lg:items-center xl:justify-start xl:pr-[30%]'>
+            <span className='font-sans text-dark-green text-sm'>
+              Alternatively, you may visit <a href="http://bit.ly/BeaNeilRegistry" target='_blank'>bit.ly/BeaNeilRegistry</a> or scan the QR code for our gift registry.
+            </span>
+            <div className='relative aspect-square size-[82px]'>
+              <Image src={qr} alt="QR code" fill className='object-fill' />
+            </div>
+          </div>
+        </div>
+        <div className='relative aspect-square min-h-[309px] w-full lg:min-h-[400px] xl:min-h-[470px] xl:max-h-[470px] xl:max-w-[470px]'>
+          <Image src={gifts} alt="gifts" fill className='object-fill' />
+        </div>
+      </div>
+    </section >
   )
 }

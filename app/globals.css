@@ -44,3 +44,7 @@ body {
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
+
+a {
+  @apply underline;
+}
