@@ -1,20 +1,50 @@
 'use client'
 
-import { useFieldArray, useForm } from "react-hook-form"
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem } from "./ui/form"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "./ui/label"
-import { PlusIcon } from "lucide-react"
+import { LoaderCircle, PlusIcon } from "lucide-react"
 import Image from "next/image"
 import flowerExtra from '@/public/icons/flower-extra.svg'
 import flowerExtra2 from '@/public/icons/flower-extra-2.svg'
+import { useEffect, useState } from "react"
+import { writeToSheets } from "@/app/actions"
+import { toast } from "sonner"
+
+type FormValues = {
+  attending: string,
+  names: { name: string }[]
+}
 
 export default function Rsvp() {
-  const { control, ...rest } = useForm()
+  const form = useForm<FormValues>()
+  const { control, handleSubmit, register } = form || {}
   const { fields, append } = useFieldArray({
     control,
     name: "names"
   })
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setIsLoading(true)
+    const { attending, names } = data || {}
+
+    const flattenedNames = names.map((name) => name.name.trim()).filter((name) => name !== '')
+
+    await writeToSheets({
+      names: flattenedNames,
+      status: attending === 'yes' ? 'Accepted' : 'Declined'
+    })
+
+    setIsLoading(false)
+    console.log('data :>> ', data);
+    toast('Your RSVP has been submitted!')
+  }
+
+  useEffect(() => {
+    append({ name: '' })
+  }, [])
 
   return (
     <section id="rsvp" className="p-8 bg-brown-4 flex flex-col gap-16 overflow-hidden lg:py-24">
@@ -27,8 +57,8 @@ export default function Rsvp() {
           Kindly let us know if you plan to attend by filling out the RSVP form below. Please submit your confirmation on or before <strong>JUNE 15, 2025</strong>.
         </span>
         {/* form section */}
-        <Form control={control} {...rest}>
-          <form className="flex flex-col gap-10 items-start justify-start max-w-[470px] lg:w-full mt-10 relative">
+        <Form {...form}>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10 items-start justify-start max-w-[470px] lg:w-full mt-10 relative">
             {/* flowers */}
             <div className="hidden xl:flex gap-0 absolute -left-[140%] -top-1/2">
               <div className='aspect-[414/612] h-[612px] w-[214px] lg:w-[414px] relative mt-14'>
@@ -42,9 +72,9 @@ export default function Rsvp() {
             {/* checkbox area */}
             <div className='flex flex-col gap-4'>
               <span className="font-sans text-base text-cream font-bold">Are you attending the event?</span>
-              <FormField name="attending" render={() => (
+              <FormField {...register('attending')} render={() => (
                 <FormItem>
-                  <FormControl>
+                  <FormControl {...register('attending')}>
                     <RadioGroup defaultValue="yes" className="flex items-center gap-8 justify-start">
                       <div className="flex items-center gap-4">
                         <RadioGroupItem value="yes" id="yes" />
@@ -63,29 +93,22 @@ export default function Rsvp() {
             {/* names area */}
             <div className='flex flex-col gap-4 w-full'>
               <span className="font-sans text-base text-cream font-bold">List the name(s) of the person/people attending.</span>
-              <FormField name="name" render={() => (
-                <FormItem>
-                  <FormControl>
-                    <input type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full" />
-                  </FormControl>
-                </FormItem>
-              )} />
-              {fields?.map((field) => (
-                <FormField name="name" key={field.id} render={() => (
+              {fields?.map((field, index) => (
+                <FormField name={`names.${index}.name`} key={field.id} render={() => (
                   <FormItem>
                     <FormControl>
-                      <input type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full" />
+                      <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full" />
                     </FormControl>
                   </FormItem>
                 )} />
               ))}
-              <button type="button" className="flex items-center gap-4 font-sans text-cream mt-2" onClick={() => append({ name: "" })}>
+              <button type="button" className="flex items-center gap-4 font-sans text-cream mt-2" onClick={() => append({ name: '' })}>
                 Add name <PlusIcon />
               </button>
             </div>
 
-            <button type="submit" className="uppercase font-sans text-cream px-6 py-1 rounded-full text-2xl font-bold w-full border-2 border-cream lg:py-4">
-              SUBMIT
+            <button disabled={isLoading} type="submit" className="uppercase font-sans text-cream px-6 py-1 rounded-full text-2xl font-bold w-full border-2 border-cream lg:py-4 text-center">
+              {isLoading ? <LoaderCircle className="animate-spin mx-auto text-cream" size={32} /> : 'Submit'}
             </button>
           </form>
         </Form>
