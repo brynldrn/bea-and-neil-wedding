@@ -7,7 +7,7 @@ import { motion } from 'motion/react'
 
 export default function TwoUp() {
   return (
-    <section className="flex px-4 bg-cream py-10 flex-col" id="our-story">
+    <section className="flex px-4 bg-cream py-10 flex-col max-w-[1440px] xl:mx-auto" id="our-story">
       <div className='relative h-[611px] lg:h-[741px] w-full flex flex-col gap-20 items-center px-8 py-16'>
         <Image src={twoUpImage} fill alt='Bea and Neil holding hands' className='object-cover w-full h-full' />
         <motion.h1
@@ -15,7 +15,7 @@ export default function TwoUp() {
           viewport={{ once: true }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className='text-white font-light text-[40px] leading-[120%] tracking-widest font-serif z-20 lg:text-[120px] xl:text-[150px]'
+          className='text-white font-light text-[64px] text-center leading-[120%] tracking-widest font-serif z-20 lg:text-[120px] xl:text-[150px]'
         >
           OUR STORY
         </motion.h1>

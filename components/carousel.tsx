@@ -48,7 +48,7 @@ export default function Carousel() {
 
         {/* carousel details */}
         <div className='flex flex-col px-12 gap-10 mt-10 lg:flex-row lg:gap-12 lg:items-center w-full lg:justify-center'>
-          <span className='block mx-auto lg:mx-0 w-full text-center font-sans text-xl lg:w-auto'>Photo and video by Frame of Mind</span>
+          <span className='block mx-auto lg:mx-0 w-full text-center font-sans text-xl lg:w-auto'>Photo and video by <a href="https://www.instagram.com/_frameofmnd/" target="_blank" rel="noopener noreferrer">Frame of Mind</a></span>
 
           {/* divider */}
           <span className='block h-0.5 w-full bg-dark-green lg:w-1/3 xl:w-[607px]' />

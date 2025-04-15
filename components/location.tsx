@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export default function Location() {
   return (
-    <section id="details" className="mt-16 py-16 pt-[100px] bg-light-green flex flex-col gap-20 items-center justify-center rounded-tl-full rounded-tr-full px-12 relative overflow-hidden">
+    <section id="details" className="mt-16 py-16 pt-[100px] bg-light-green flex flex-col gap-20 items-center justify-center rounded-tl-full rounded-tr-full px-12 relative overflow-hidden max-w-[1440px] xl:mx-auto">
       <span className="block text-white font-serif italic text-[32px] text-center w-[277px] line-clamp-2 -mt-5 md:px-34 md:w-[730px] md:line-clamp-3 lg:mt-20 lg:w-[953px] lg:text-[56px]">
         Together with hearts full of love, we invite you to be part of our wedding day
       </span>

@@ -4,7 +4,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem } from "./ui/form"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "./ui/label"
-import { LoaderCircle, PlusIcon } from "lucide-react"
+import { LoaderCircle, PlusIcon, X } from "lucide-react"
 import Image from "next/image"
 import flowerExtra from '@/public/icons/flower-extra.svg'
 import flowerExtra2 from '@/public/icons/flower-extra-2.svg'
@@ -20,7 +20,7 @@ type FormValues = {
 export default function Rsvp() {
   const form = useForm<FormValues>()
   const { control, handleSubmit, register } = form || {}
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "names"
   })
@@ -60,7 +60,7 @@ export default function Rsvp() {
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10 items-start justify-start max-w-[470px] lg:w-full mt-10 relative">
             {/* flowers */}
-            <div className="hidden xl:flex gap-0 absolute -left-[140%] -top-1/2">
+            <div className="hidden xl:flex gap-0 absolute -left-[140%] -bottom-[250px]">
               <div className='aspect-[414/612] h-[612px] w-[214px] lg:w-[414px] relative mt-14'>
                 <Image src={flowerExtra} alt='flower' fill className='object-fill' />
               </div>
@@ -97,14 +97,23 @@ export default function Rsvp() {
                 <FormField name={`names.${index}.name`} key={field.id} render={() => (
                   <FormItem>
                     <FormControl>
-                      <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full" />
+                      <div className="flex items-center relative">
+                        <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full pr-8" />
+                        {index !== 0 && (
+                          <button className="absolute right-0 top-1/2 -translate-y-1/2" type="button" onClick={() => remove(index)}>
+                            <X color="white" />
+                          </button>
+                        )}
+                      </div>
                     </FormControl>
                   </FormItem>
                 )} />
               ))}
-              <button type="button" className="flex items-center gap-4 font-sans text-cream mt-2" onClick={() => append({ name: '' })}>
-                Add name <PlusIcon />
-              </button>
+              {fields?.length <= 20 && (
+                <button type="button" className="flex items-center gap-4 font-sans text-cream mt-2" onClick={() => append({ name: '' })}>
+                  Add name <PlusIcon />
+                </button>
+              )}
             </div>
 
             <button disabled={isLoading} type="submit" className="uppercase font-sans text-cream px-6 py-1 rounded-full text-2xl font-bold w-full border-2 border-cream lg:py-4 text-center">
