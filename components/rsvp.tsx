@@ -19,27 +19,34 @@ type FormValues = {
 
 export default function Rsvp() {
   const form = useForm<FormValues>()
-  const { control, handleSubmit, register } = form || {}
+  const { control, handleSubmit, register, resetField, reset } = form || {}
   const { fields, append, remove } = useFieldArray({
     control,
     name: "names"
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [isAttending, setIsAttending] = useState('yes')
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true)
-    const { attending, names } = data || {}
+    const { names } = data || {}
 
     const flattenedNames = names.map((name) => name.name.trim()).filter((name) => name !== '')
 
     await writeToSheets({
       names: flattenedNames,
-      status: attending === 'yes' ? 'Accepted' : 'Declined'
+      status: isAttending === 'yes' ? 'Accepted' : 'Declined'
     })
 
     setIsLoading(false)
-    console.log('data :>> ', data);
     toast('Your RSVP has been submitted!')
+
+    reset()
+    setIsAttending('yes')
+
+    // remove all and append 1
+    remove()
+    append({ name: '' })
   }
 
   useEffect(() => {
@@ -72,10 +79,10 @@ export default function Rsvp() {
             {/* checkbox area */}
             <div className='flex flex-col gap-4'>
               <span className="font-sans text-base text-cream font-bold">Are you attending the event?</span>
-              <FormField {...register('attending')} render={() => (
+              <FormField name="attending" render={() => (
                 <FormItem>
-                  <FormControl {...register('attending')}>
-                    <RadioGroup defaultValue="yes" className="flex items-center gap-8 justify-start">
+                  <FormControl>
+                    <RadioGroup value={isAttending} className="flex items-center gap-8 justify-start" onValueChange={(value) => setIsAttending(value)}>
                       <div className="flex items-center gap-4">
                         <RadioGroupItem value="yes" id="yes" />
                         <Label htmlFor="yes" className="text-cream text-base font-light font-sans">Yes</Label>
