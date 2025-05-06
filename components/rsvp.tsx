@@ -4,7 +4,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "./ui/label"
-import { CircleX, LoaderCircle, PlusIcon, X } from "lucide-react"
+import { LoaderCircle, PlusIcon, X } from "lucide-react"
 import Image from "next/image"
 import flowerExtra from '@/public/icons/flower-extra.svg'
 import flowerExtra2 from '@/public/icons/flower-extra-2.svg'
@@ -32,7 +32,7 @@ export default function Rsvp() {
     name: "names"
   })
   const [isLoading, setIsLoading] = useState(false)
-  const [isAttending, setIsAttending] = useState('yes')
+  const [isAttending, setIsAttending] = useState<'yes' | 'no' | undefined>()
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setIsLoading(true)
@@ -87,11 +87,11 @@ export default function Rsvp() {
 
             {/* checkbox area */}
             <div className='flex flex-col gap-4'>
-              <span className="font-sans text-base text-cream font-bold">Are you attending the event?</span>
+              <p className="font-sans text-base text-cream font-bold">Are you attending the event? <span className="text-brown-6">*</span></p>
               <FormField name="attending" render={() => (
                 <FormItem>
                   <FormControl>
-                    <RadioGroup value={isAttending} className="flex items-center gap-8 justify-start" onValueChange={(value) => setIsAttending(value)}>
+                    <RadioGroup value={isAttending} className="flex items-center gap-8 justify-start" onValueChange={(value) => setIsAttending(value as 'yes' | 'no')}>
                       <div className="flex items-center gap-4">
                         <RadioGroupItem value="yes" id="yes" />
                         <Label htmlFor="yes" className="text-cream text-base font-light font-sans">Yes</Label>
@@ -108,7 +108,7 @@ export default function Rsvp() {
 
             {/* names area */}
             <div className='flex flex-col gap-4 w-full'>
-              <span className="font-sans text-base text-cream font-bold">Enter your name and the names of those attending with you.</span>
+              <p className="font-sans text-base text-cream font-bold">Enter your name and the names of those attending with you. <span className="text-brown-6">*</span></p>
               {fields?.map((field, index) => {
                 const { message, name } = errors?.names?.[index] || {}
 
