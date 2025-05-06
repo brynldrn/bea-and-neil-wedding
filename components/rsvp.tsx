@@ -99,15 +99,15 @@ export default function Rsvp() {
 
             {/* names area */}
             <div className='flex flex-col gap-4 w-full'>
-              <span className="font-sans text-base text-cream font-bold">List the name(s) of the person/people attending.</span>
+              <span className="font-sans text-base text-cream font-bold">Enter your name and the names of those attending with you.</span>
               {fields?.map((field, index) => (
                 <FormField name={`names.${index}.name`} key={field.id} render={() => (
                   <FormItem>
                     <FormControl>
                       <div className="flex items-center relative">
-                        <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-b-2 border-cream pb-2 text-cream font-serif italic w-full pr-8" />
+                        <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 border-brown-3 py-2 text-cream font-serif italic w-full px-4 rounded-md" />
                         {index !== 0 && (
-                          <button className="absolute right-0 top-1/2 -translate-y-1/2" type="button" onClick={() => remove(index)}>
+                          <button className="absolute right-2 top-1/2 -translate-y-1/2" type="button" onClick={() => remove(index)}>
                             <X color="white" />
                           </button>
                         )}
@@ -117,13 +117,13 @@ export default function Rsvp() {
                 )} />
               ))}
               {fields?.length <= 20 && (
-                <button type="button" className="flex items-center gap-4 font-sans text-cream mt-2" onClick={() => append({ name: '' })}>
+                <button type="button" className="inline-flex items-center gap-2 font-sans text-cream mt-2 bg-white/10 self-start rounded-full py-1 px-2.5" onClick={() => append({ name: '' })}>
                   Add name <PlusIcon />
                 </button>
               )}
             </div>
 
-            <button disabled={isLoading} type="submit" className="uppercase font-sans text-cream px-6 py-1 rounded-full text-2xl font-bold w-full border-2 border-cream lg:py-4 text-center">
+            <button disabled={isLoading} type="submit" className="uppercase font-sans bg-cream px-6 py-1 rounded-full text-2xl font-bold w-full text-brown-5 lg:py-4 text-center">
               {isLoading ? <LoaderCircle className="animate-spin mx-auto text-cream" size={32} /> : 'Submit'}
             </button>
           </form>
