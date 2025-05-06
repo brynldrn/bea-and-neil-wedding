@@ -17,7 +17,11 @@ export default function Navigation() {
     <nav className="justify-between items-center flex p-8 absolute top-0 left-0 bg-transparent z-40 w-full lg:pt-10 lg:px-16">
 
       {/* mobile menu */}
-      {isOpen && <Menu isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <div className="fixed top-0 left-0 w-dvw h-dvh bg-transparent z-10 flex flex-col justify-end items-center lg:hidden overflow-hidden">
+          <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
+        </div>
+      )}
       {/* left-side menu */}
       <div className="hidden lg:flex flex-col gap-6 items-start">
         <Link href='#our-story' scroll className="text-white text-base font-light font-sans leading-[160%] tracking-[4px]">OUR STORY</Link>
