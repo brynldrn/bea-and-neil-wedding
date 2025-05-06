@@ -19,7 +19,7 @@ type FormValues = {
 
 export default function Rsvp() {
   const form = useForm<FormValues>()
-  const { control, handleSubmit, register, resetField, reset } = form || {}
+  const { control, handleSubmit, register, reset } = form || {}
   const { fields, append, remove } = useFieldArray({
     control,
     name: "names"
@@ -50,7 +50,9 @@ export default function Rsvp() {
   }
 
   useEffect(() => {
-    append({ name: '' })
+    append({ name: '' }, {
+      shouldFocus: false
+    })
   }, [])
 
   return (
