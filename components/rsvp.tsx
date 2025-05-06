@@ -1,25 +1,32 @@
 'use client'
 
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem } from "./ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "./ui/label"
-import { LoaderCircle, PlusIcon, X } from "lucide-react"
+import { CircleX, LoaderCircle, PlusIcon, X } from "lucide-react"
 import Image from "next/image"
 import flowerExtra from '@/public/icons/flower-extra.svg'
 import flowerExtra2 from '@/public/icons/flower-extra-2.svg'
 import { useEffect, useState } from "react"
 import { writeToSheets } from "@/app/actions"
 import { toast } from "sonner"
-
-type FormValues = {
-  attending: string,
-  names: { name: string }[]
-}
+import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { cn } from "@/lib/utils"
+import exclamationMark from '@/public/icons/exclamation.svg'
 
 export default function Rsvp() {
-  const form = useForm<FormValues>()
-  const { control, handleSubmit, register, reset } = form || {}
+  const formSchema = z.object({
+    names: z.array(z.object({
+      name: z.string().nonempty('Please enter a name here')
+    }))
+  })
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+  const { control, handleSubmit, register, reset, formState: { errors } } = form || {}
   const { fields, append, remove } = useFieldArray({
     control,
     name: "names"
@@ -27,7 +34,7 @@ export default function Rsvp() {
   const [isLoading, setIsLoading] = useState(false)
   const [isAttending, setIsAttending] = useState('yes')
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setIsLoading(true)
     const { names } = data || {}
 
@@ -102,23 +109,39 @@ export default function Rsvp() {
             {/* names area */}
             <div className='flex flex-col gap-4 w-full'>
               <span className="font-sans text-base text-cream font-bold">Enter your name and the names of those attending with you.</span>
-              {fields?.map((field, index) => (
-                <FormField name={`names.${index}.name`} key={field.id} render={() => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex items-center relative">
-                        <input required {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className="placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 border-brown-3 py-2 text-cream font-serif italic w-full px-4 rounded-md" />
-                        {index !== 0 && (
-                          <button className="absolute right-2 top-1/2 -translate-y-1/2" type="button" onClick={() => remove(index)}>
-                            <X color="white" />
-                          </button>
-                        )}
-                      </div>
-                    </FormControl>
-                  </FormItem>
-                )} />
-              ))}
-              {fields?.length <= 20 && (
+              {fields?.map((field, index) => {
+                const { message, name } = errors?.names?.[index] || {}
+
+                return (
+                  <FormField name={`names.${index}.name`} key={field.id} render={() => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex items-center relative">
+                          <input {...register(`names.${index}.name`)} type="text" placeholder="Enter yout name here" className={cn('placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 py-2 text-cream font-serif italic w-full px-4 rounded-sm', {
+                            'border-brown-6': name,
+                            'border-brown-3': !name
+                          })} />
+
+                          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center gap-1">
+                            {name && (
+                              <div className="bg-brown-6 rounded-full size-5 flex items-center justify-center relative">
+                                <Image src={exclamationMark} fill className="object-fill scale-50" alt="warning" />
+                              </div>
+                            )}
+                            {index !== 0 && (
+                              <button className="bg-white rounded-full size-5 text-center flex items-center justify-center" type="button" onClick={() => remove(index)}>
+                                <X className="size-3" color="brown" strokeWidth={3} />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-brown-6">{message}</FormMessage>
+                    </FormItem>
+                  )} />
+                )
+              })}
+              {fields?.length <= 15 && (
                 <button type="button" className="inline-flex items-center gap-2 font-sans text-cream mt-2 bg-white/10 self-start rounded-full py-1 px-2.5" onClick={() => append({ name: '' })}>
                   Add name <PlusIcon />
                 </button>
