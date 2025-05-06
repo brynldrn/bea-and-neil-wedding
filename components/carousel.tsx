@@ -14,10 +14,14 @@ import slide03 from '@/public/images/slide03.png'
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react'
 import leftArrow from '@/public/icons/arrow-left.svg'
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import NextJsImage from './nextJsImage';
 
 export default function Carousel() {
   const [_width, setWidth] = useState(0);
   const carousel = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setWidth((carousel?.current?.scrollWidth ?? 0) - (carousel.current?.offsetWidth ?? 0));
@@ -61,10 +65,16 @@ export default function Carousel() {
             <SliderNextButton className='flex items-center justify-center w-10 h-10 bg-transparent rounded-full border-2 border-dark-green rotate-180 min-w-10 min-h-10 lg:min-w-16 lg:min-h-16'>
               <Image src={leftArrow} width={14} height={14} alt='right arrow' className='lg:size-6' />
             </SliderNextButton>
-            <button className='rounded-full border-2 border-dark-green py-3.5 px-11 uppercase text-dark-green font-sans text-lg font-bold leading-2 min-w-[166px] lg:px-6 lg:text-2xl lg:py-6'>View All</button>
+            <button className='rounded-full border-2 border-dark-green py-3.5 px-11 uppercase text-dark-green font-sans text-lg font-bold leading-2 min-w-[166px] lg:px-6 lg:text-2xl lg:py-6' onClick={() => setOpen(true)}>View All</button>
           </div>
         </div>
       </BaseCarousel>
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={[slide01, slide02, slide03]}
+        render={{ slide: NextJsImage }}
+      />
     </section>
   )
 }
