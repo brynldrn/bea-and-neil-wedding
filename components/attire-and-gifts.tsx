@@ -6,8 +6,10 @@ import women from '@/public/icons/women.svg'
 import qr from '@/public/icons/QR.svg'
 import gifts from '@/public/images/gifts.png'
 import Image from 'next/image'
+import { motion } from 'motion/react'
 
 export default function AttireAndGifts() {
+
   return (
     <section id="attire-and-gifts" className='bg-white w-full'>
       <div className="py-16 bg-white flex flex-col gap-16 max-w-[1440px] xl:mx-auto xl:overflow-hidden">
@@ -113,9 +115,11 @@ export default function AttireAndGifts() {
               </div>
             </div>
           </div>
-          <div className='relative aspect-square min-h-[309px] w-full lg:min-h-[400px] xl:min-h-[470px] xl:max-h-[470px] xl:max-w-[470px]'>
+          <motion.div whileHover={{
+            scale: 1.1
+          }} className='relative aspect-square min-h-[309px] w-full lg:min-h-[400px] xl:min-h-[470px] xl:max-h-[470px] xl:max-w-[470px]'>
             <Image src={gifts} alt="gifts" fill className='object-fill' />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
