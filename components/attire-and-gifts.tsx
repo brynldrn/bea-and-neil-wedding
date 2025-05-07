@@ -63,7 +63,11 @@ export default function AttireAndGifts() {
           </div>
 
           {/* card */}
-          <div className="flex flex-col items-center justify-center gap-10 basis-full bg-bone-white py-16 px-12 rounded-tr-[50px] rounded-br-[50px] mr-8 lg:order-1 lg:mr-0 xl:rounded-tr-[100px] xl:rounded-br-[100px] xl:py-[72px]">
+          <motion.div
+            whileHover={{ backgroundColor: 'var(--cream)' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center gap-10 basis-full bg-bone-white py-16 px-12 rounded-tr-[50px] rounded-br-[50px] mr-8 lg:order-1 lg:mr-0 xl:rounded-tr-[100px] xl:rounded-br-[100px] xl:py-[72px]"
+          >
             <div className='relative aspect-[244/281] w-full h-[281px]'>
               <Image src={men} alt="men's attire" fill className='object-fill' />
             </div>
@@ -76,10 +80,14 @@ export default function AttireAndGifts() {
                 Suit or Long Sleeves and Trousers
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* card */}
-          <div className="flex flex-col items-center justify-center gap-10 basis-full bg-bone-white py-16 px-12 rounded-tl-[50px] rounded-bl-[50px] ml-8 lg:order-3 lg:ml-0 xl:rounded-tl-[100px] xl:rounded-bl-[100px] xl:py-[72px]">
+          <motion.div
+            whileHover={{ backgroundColor: 'var(--cream)' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center gap-10 basis-full bg-bone-white py-16 px-12 rounded-tl-[50px] rounded-bl-[50px] ml-8 lg:order-3 lg:ml-0 xl:rounded-tl-[100px] xl:rounded-bl-[100px] xl:py-[72px]"
+          >
             <div className='relative aspect-[244/281] w-full h-[281px]'>
               <Image src={women} alt="women's attire" fill className='object-fill' />
             </div>
@@ -92,7 +100,7 @@ export default function AttireAndGifts() {
                 Long Gown or Suit
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* gifts section */}
@@ -115,11 +123,9 @@ export default function AttireAndGifts() {
               </div>
             </div>
           </div>
-          <motion.div whileHover={{
-            scale: 1.1
-          }} className='relative aspect-square min-h-[309px] w-full lg:min-h-[400px] xl:min-h-[470px] xl:max-h-[470px] xl:max-w-[470px]'>
-            <Image src={gifts} alt="gifts" fill className='object-fill' />
-          </motion.div>
+          <div className='relative aspect-square min-h-[309px] w-full lg:min-h-[400px] xl:min-h-[470px] xl:max-h-[470px] xl:max-w-[470px] overflow-hidden'>
+            <Image src={gifts} alt="gifts" fill className='object-fill hover:scale-110 duration-1000 ease-in-out' />
+          </div>
         </div>
       </div>
     </section>
