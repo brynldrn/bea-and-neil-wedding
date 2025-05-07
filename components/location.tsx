@@ -5,6 +5,8 @@ import reception from '@/public/icons/reception.svg';
 import flowerLeft from '@/public/icons/flower-left.svg';
 import flowerRight from '@/public/icons/flower-right.svg';
 import Image from 'next/image';
+import { Button } from './ui/button';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 export default function Location() {
   return (
@@ -24,6 +26,9 @@ export default function Location() {
             <span className='font-sans text-white font-bold text-2xl'>Ceremony</span>
             <span className='text-white font-serif text-lg text-center md:block md:w-[320px]'>Sta. Maria Della Strada Parish, Katipunan Ave. Quezon City</span>
             <span className='font-sans text-white font-bold text-2xl'>2:30 PM</span>
+            <a href='https://maps.app.goo.gl/B2quRoQ4JuDpZNGT9' target='_blank' className='rounded-full border-2 border-cream py-3.5 px-11 uppercase text-cream font-sans text-lg font-bold leading-2 min-w-[166px] lg:px-6 lg:text-2xl lg:py-6 flex items-center gap-4 !no-underline'>
+              View Location <SquareArrowOutUpRight />
+            </a>
           </div>
         </div>
 
@@ -36,6 +41,9 @@ export default function Location() {
             <span className='font-sans text-white font-bold text-2xl'>Reception</span>
             <span className='text-white font-serif text-lg text-center md:block md:w-[320px]'>Glass Garden, 257 Evangelista Ave. Santolan, Pasig City</span>
             <span className='font-sans text-white font-bold text-2xl'>5:00 PM</span>
+            <a href='https://maps.app.goo.gl/3nV3KeNrJ4qtZxFS8' target='_blank' className='rounded-full border-2 border-cream py-3.5 px-11 uppercase text-cream font-sans text-lg font-bold leading-2 min-w-[166px] lg:px-6 lg:text-2xl lg:py-6 flex items-center gap-4 !no-underline'>
+              View Location <SquareArrowOutUpRight />
+            </a>
           </div>
         </div>
       </div>
