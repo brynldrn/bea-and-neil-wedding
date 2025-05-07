@@ -17,6 +17,7 @@ import leftArrow from '@/public/icons/arrow-left.svg'
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import NextJsImage from './nextJsImage';
+import CarouselProgress from './carousel-progress';
 
 export default function Carousel() {
   const [_width, setWidth] = useState(0);
@@ -34,18 +35,18 @@ export default function Carousel() {
       }}>
         <SliderContainer className='gap-2 lg:gap-4'>
           <Slider>
-            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px]'>
-              <Image src={slide01} fill alt='Slide 1' />
+            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px] overflow-hidden'>
+              <Image src={slide01} fill alt='Slide 1' className="hover:scale-110 duration-1000 ease-in-out" />
             </motion.div>
           </Slider>
           <Slider>
-            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px]'>
-              <Image src={slide02} fill alt='Slide 2' />
+            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px] overflow-hidden'>
+              <Image src={slide02} fill alt='Slide 2' className="hover:scale-110 duration-1000 ease-in-out" />
             </motion.div>
           </Slider>
           <Slider>
-            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px]'>
-              <Image src={slide03} fill alt='Slide 3' />
+            <motion.div className='min-w-[20rem] min-h-[25rem] relative aspect-[469/608] lg:min-w-[469px] lg:min-h-[608px] max-h-[423px] overflow-hidden'>
+              <Image src={slide03} fill alt='Slide 3' className="hover:scale-110 duration-1000 ease-in-out" />
             </motion.div>
           </Slider>
         </SliderContainer>
@@ -55,7 +56,8 @@ export default function Carousel() {
           <span className='block mx-auto lg:mx-0 w-full text-center font-sans text-xl lg:w-auto'>Photo and video by <a href="https://www.instagram.com/_frameofmnd/" target="_blank" rel="noopener noreferrer">Frame of Mind</a></span>
 
           {/* divider */}
-          <span className='block h-0.5 w-full bg-dark-green lg:w-1/3 xl:w-[607px]' />
+          <span className='h-0.5 w-full bg-dark-green lg:w-1/3 xl:w-[607px] hidden lg:block' />
+          <CarouselProgress />
 
           {/* carousel controls */}
           <div className='flex gap-2 items-center justify-center'>

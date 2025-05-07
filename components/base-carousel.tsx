@@ -51,7 +51,7 @@ interface CarouselContextType {
   selectedSnap: any;
   snapCount: any;
   isScale: boolean;
-  slidesrArr: ThumbnailSlide[];
+  slidesArr: ThumbnailSlide[];
   setSlidesArr: any;
   emblaThumbsRef: any;
   onThumbClick: any;
@@ -84,7 +84,7 @@ const Carousel: React.FC<CarouselProps> = ({
   isAutoPlay = false,
 }) => {
   const carouselId = useId();
-  const [slidesrArr, setSlidesArr] = useState<Element[]>([]);
+  const [slidesArr, setSlidesArr] = useState<Element[]>([]);
   const plugins = [];
 
   if (activeSlider) {
@@ -257,7 +257,7 @@ const Carousel: React.FC<CarouselProps> = ({
         isScale,
         emblaThumbsRef,
         onThumbClick,
-        slidesrArr,
+        slidesArr,
       }}
     >
       <div
@@ -569,14 +569,14 @@ export const useSelectedSnapDisplay = (
 };
 
 export const ThumsSlider: React.FC = () => {
-  const { emblaThumbsRef, slidesrArr, selectedIndex, onThumbClick } =
+  const { emblaThumbsRef, slidesArr, selectedIndex, onThumbClick } =
     useCarouselContext();
-  // console.log(slidesrArr);
+  // console.log(slidesArr);
 
   return (
     <div className='overflow-hidden mt-2' ref={emblaThumbsRef}>
       <div className='flex flex-row gap-2'>
-        {slidesrArr.map((slide, index) => (
+        {slidesArr.map((slide, index) => (
           <div
             key={`thumb-${index}`}
             className={`min-w-0 w-full xl:h-24 aspect-auto border-2 rounded-md ${index === selectedIndex
