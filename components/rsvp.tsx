@@ -149,7 +149,7 @@ export default function Rsvp() {
 
                 {/* names area */}
                 <div className='flex flex-col gap-4 w-full'>
-                  <p className="font-sans text-base text-cream font-bold">{isAttending === 'yes' ? 'Enter your name and the names of those attending with you.' : 'Wish you could be there! Please enter the names of those who will not be attending the event.'} <span className="text-brown-6">*</span></p>
+                  <p className="font-sans text-base text-cream font-bold">{isAttending === 'yes' || isAttending === undefined ? 'Enter your name and the names of those attending with you.' : 'Wish you could be there! Please enter the names of those who will not be attending the event.'} <span className="text-brown-6">*</span></p>
                   {fields?.map((field, index) => {
                     const { message, name } = errors?.names?.[index] || {}
 
