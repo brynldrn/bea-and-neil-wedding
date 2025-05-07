@@ -4,6 +4,7 @@ import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
 import { cn } from "@/lib/utils"
+import { CheckIcon } from "lucide-react"
 
 function RadioGroup({
   className,
@@ -33,9 +34,10 @@ function RadioGroupItem({
     >
       <RadioGroupPrimitive.Indicator
         data-slot="radio-group-indicator"
-        className="relative flex items-center justify-center"
+        className="relative grid items-center justify-center"
       >
-        <div className="block size-3 bg-cream rounded-xs" />
+        <div className="block size-4.5 bg-cream rounded-xs row-start-1 col-start-1" />
+        <CheckIcon className="size-4.5 text-brown-6 row-start-1 col-start-1" strokeWidth={3} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )
