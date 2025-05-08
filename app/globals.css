@@ -15,6 +15,7 @@
   --brown-4: #996449;
   --brown-5: #614738;
   --brown-6: #51020A;
+  --brown-7: #AC7559;
   --green-1: #99A57F;
   --green-2: #59683D;
   --radius: 0.625rem;
@@ -69,6 +70,7 @@
   --color-brown-4: var(--brown-4);
   --color-brown-5: var(--brown-5);
   --color-brown-6: var(--brown-6);
+  --color-brown-7: var(--brown-7);
   --color-green-1: var(--green-1);
   --color-green-2: var(--green-2);
   --color-sidebar-ring: var(--sidebar-ring);
