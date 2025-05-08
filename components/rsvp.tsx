@@ -42,6 +42,8 @@ export default function Rsvp() {
     setIsSubmitted(false)
     const { names, phoneNumber } = data || {}
 
+    console.log('names :>> ', names);
+
     const flattenedNames = names.map((name) => name.name.trim()).filter((name) => name !== '')
 
     await writeToSheets({
