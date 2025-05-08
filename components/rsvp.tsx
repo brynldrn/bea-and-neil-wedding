@@ -165,13 +165,13 @@ export default function Rsvp() {
                       <Fragment key={field.id}>
                         <div className="grid grid-cols-2 gap-4 w-full">
                           <div className={cn('w-full col-start-1', {
-                            'col-end-1': index === 0 && isAttending === 'yes',
-                            'col-span-2': index !== 0 || isAttending !== 'yes',
+                            'col-end-1': index === 0 && isAttending !== 'no',
+                            'col-span-2': index !== 0 || isAttending === 'no',
                           })}>
                             <FormField name={`names.${index}.name`} render={() => (
                               <FormItem>
                                 <FormLabel className="gap-0 font-sans text-sm">
-                                  <span className="text-cream">{index === 0 && isAttending === 'yes' ? 'Name of contact person' : 'Name'}</span>
+                                  <span className="text-cream">{index === 0 && isAttending !== 'no' ? 'Name of contact person' : 'Name'}</span>
                                   <span className="text-brown-6">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -201,7 +201,7 @@ export default function Rsvp() {
                           </div>
 
                           {/* Phone number field */}
-                          {index === 0 && isAttending === 'yes' && (
+                          {index === 0 && isAttending !== 'no' && (
                             <div className="col-start-2">
                               <FormField name='phoneNumber' key='phoneNumber' render={() => (
                                 <FormItem>
@@ -211,7 +211,7 @@ export default function Rsvp() {
                                   </FormLabel>
                                   <FormControl>
                                     <div className="flex items-center relative">
-                                      <input {...register('phoneNumber')} type="text" className={cn('placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 py-2 text-cream font-serif italic w-full px-4 rounded-sm', {
+                                      <input {...register('phoneNumber')} type="number" className={cn('placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 py-2 text-cream font-serif italic w-full px-4 rounded-sm', {
                                         'border-brown-6': phoneNumberMessage,
                                         'border-brown-3': !phoneNumberMessage
                                       })} />
@@ -246,7 +246,7 @@ export default function Rsvp() {
                   )}
                 </div>
 
-                <button disabled={isLoading} type="submit" className="uppercase font-sans bg-cream px-6 py-1 rounded-full text-2xl font-bold w-full text-brown-5 lg:py-4 text-center">
+                <button disabled={isLoading || isAttending === undefined} type="submit" className="uppercase font-sans bg-cream px-6 py-1 rounded-full text-2xl font-bold w-full text-brown-5 lg:py-4 text-center disabled:opacity-50">
                   {isLoading ? <LoaderCircle className="animate-spin mx-auto text-brown-6" size={32} /> : 'Submit'}
                 </button>
               </form>
