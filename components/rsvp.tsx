@@ -18,11 +18,12 @@ import exclamationMark from '@/public/icons/exclamation.svg'
 import { motion } from "motion/react"
 
 export default function Rsvp() {
+  const [isAttending, setIsAttending] = useState<'yes' | 'no' | undefined>()
   const formSchema = z.object({
     names: z.array(z.object({
       name: z.string().nonempty('Please enter a name here')
     })),
-    phoneNumber: z.string().nonempty('Please enter phone number'),
+    phoneNumber: isAttending === 'yes' ? z.string().nonempty('Please enter phone number') : z.string().optional()
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,7 +35,6 @@ export default function Rsvp() {
     name: "names"
   })
   const [isLoading, setIsLoading] = useState(false)
-  const [isAttending, setIsAttending] = useState<'yes' | 'no' | undefined>()
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
