@@ -16,11 +16,11 @@ export const writeToSheets = async ({ names, status = 'Accepted', phoneNumber }:
 
   const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
 
-  await Promise.all(noEmptyNames?.map(async (name) => {
+  await Promise.all(noEmptyNames?.map(async (name, index) => {
     await sheet.addRow({
       'Name': name,
       'RSVP status': status,
-      ...phoneNumber ? { 'Phone Number': phoneNumber } : {},
+      ...phoneNumber && index === 0 ? { 'Phone Number': phoneNumber } : {},
     })
   }))
 }

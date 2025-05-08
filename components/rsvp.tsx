@@ -156,7 +156,7 @@ export default function Rsvp() {
 
                 {/* names area */}
                 <div className='flex flex-col gap-4 w-full'>
-                  <p className="font-sans text-base text-cream font-bold">{isAttending === 'yes' || isAttending === undefined ? 'Enter your name and the names of those attending with you.' : 'Wish you could be there! Please enter the names of those who will not be attending the event.'} <span className="text-brown-6">*</span></p>
+                  <p className="font-sans text-base text-cream font-bold">{isAttending === 'yes' || isAttending === undefined ? 'Enter your name and the names of those attending with you.' : 'Wish you could be there! Please enter the names of those who will not be attending the event.'}</p>
                   {fields?.map((field, index) => {
                     const { message, name } = errors?.names?.[index] || {}
                     const { message: phoneNumberMessage } = errors?.phoneNumber || {}
@@ -262,7 +262,7 @@ export default function Rsvp() {
               <>
                 <span className="block text-2xl text-off-white font-serif italic">Your RSVP is Confirmed! 🎉</span>
                 <span className="block font-sans text-base text-cream pr-12">
-                  We&rsquo;re so grateful you&rsquo;ll be joining us on our big day. Can&rsquo;t waitto see you there!
+                  We&rsquo;re so grateful you&rsquo;ll be joining us on our big day. Can&rsquo;t wait to see you there!
                 </span>
               </>
             ) : (
