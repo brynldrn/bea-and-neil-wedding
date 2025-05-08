@@ -22,13 +22,13 @@ export default function Rsvp() {
     names: z.array(z.object({
       name: z.string().nonempty('Please enter a name here')
     })),
-    contactNumber: z.string().nonempty('Please enter a contact number here'),
+    phoneNumber: z.string().nonempty('Please enter phone number'),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
-  const { control, handleSubmit, register, reset, formState: { errors }, clearErrors } = form || {}
+  const { control, handleSubmit, register, reset, resetField, formState: { errors }, clearErrors } = form || {}
   const { fields, append, remove } = useFieldArray({
     control,
     name: "names"
@@ -40,13 +40,14 @@ export default function Rsvp() {
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setIsLoading(true)
     setIsSubmitted(false)
-    const { names } = data || {}
+    const { names, phoneNumber } = data || {}
 
     const flattenedNames = names.map((name) => name.name.trim()).filter((name) => name !== '')
 
     await writeToSheets({
       names: flattenedNames,
-      status: isAttending === 'yes' ? 'Accepted' : 'Declined'
+      status: isAttending === 'yes' ? 'Accepted' : 'Declined',
+      phoneNumber: isAttending === 'yes' ? phoneNumber : undefined
     })
 
     setIsLoading(false)
@@ -66,7 +67,10 @@ export default function Rsvp() {
     })
   }, [])
 
-  useEffect(() => clearErrors(), [isAttending])
+  useEffect(() => {
+    clearErrors()
+    resetField('phoneNumber')
+  }, [isAttending])
 
   return (
     <section id="rsvp" className="p-8 bg-brown-4 flex flex-col gap-16 overflow-hidden lg:py-24">
@@ -155,7 +159,7 @@ export default function Rsvp() {
                   <p className="font-sans text-base text-cream font-bold">{isAttending === 'yes' || isAttending === undefined ? 'Enter your name and the names of those attending with you.' : 'Wish you could be there! Please enter the names of those who will not be attending the event.'} <span className="text-brown-6">*</span></p>
                   {fields?.map((field, index) => {
                     const { message, name } = errors?.names?.[index] || {}
-                    const { message: phoneNumberMessage } = errors?.contactNumber || {}
+                    const { message: phoneNumberMessage } = errors?.phoneNumber || {}
 
                     return (
                       <Fragment key={field.id}>
@@ -195,9 +199,11 @@ export default function Rsvp() {
                               </FormItem>
                             )} />
                           </div>
+
+                          {/* Phone number field */}
                           {index === 0 && isAttending === 'yes' && (
                             <div className="col-start-2">
-                              <FormField name='contactNumber' key='contactNumber' render={() => (
+                              <FormField name='phoneNumber' key='phoneNumber' render={() => (
                                 <FormItem>
                                   <FormLabel className="gap-0 font-sans text-sm">
                                     <span className="text-cream">Phone Number</span>
@@ -205,7 +211,7 @@ export default function Rsvp() {
                                   </FormLabel>
                                   <FormControl>
                                     <div className="flex items-center relative">
-                                      <input {...register('contactNumber')} type="text" className={cn('placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 py-2 text-cream font-serif italic w-full px-4 rounded-sm', {
+                                      <input {...register('phoneNumber')} type="text" className={cn('placeholder:font-serif placeholder:italic placeholder:text-base placeholder:opacity-50 placeholder:text-cream border-1 py-2 text-cream font-serif italic w-full px-4 rounded-sm', {
                                         'border-brown-6': phoneNumberMessage,
                                         'border-brown-3': !phoneNumberMessage
                                       })} />

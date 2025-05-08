@@ -9,7 +9,7 @@ const serviceAccountAuth = new JWT({
   scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file'],
 });
 
-export const writeToSheets = async ({ names, status = 'Accepted' }: { names: string[], status: 'Accepted' | 'Declined' }) => {
+export const writeToSheets = async ({ names, status = 'Accepted', phoneNumber }: { names: string[], status: 'Accepted' | 'Declined', phoneNumber?: string }) => {
   const noEmptyNames = names.filter((name) => name.trim() !== '');
   const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID ?? '', serviceAccountAuth);
   await doc.loadInfo(); // loads document properties and worksheets
@@ -17,6 +17,10 @@ export const writeToSheets = async ({ names, status = 'Accepted' }: { names: str
   const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
 
   await Promise.all(noEmptyNames?.map(async (name) => {
-    await sheet.addRow({ 'Name': name, 'RSVP status': status })
+    await sheet.addRow({
+      'Name': name,
+      'RSVP status': status,
+      ...phoneNumber ? { 'Phone Number': phoneNumber } : {},
+    })
   }))
 }
