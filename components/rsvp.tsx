@@ -164,9 +164,8 @@ export default function Rsvp() {
                     return (
                       <Fragment key={field.id}>
                         <div className="grid grid-cols-2 gap-4 w-full">
-                          <div className={cn('w-full col-start-1', {
-                            'col-end-1': index === 0 && isAttending !== 'no',
-                            'col-span-2': index !== 0 || isAttending === 'no',
+                          <div className={cn('w-full col-start-1 col-span-2', {
+                            'md:col-end-1': index === 0 && isAttending !== 'no'
                           })}>
                             <FormField name={`names.${index}.name`} render={() => (
                               <FormItem>
@@ -202,7 +201,7 @@ export default function Rsvp() {
 
                           {/* Phone number field */}
                           {index === 0 && isAttending !== 'no' && (
-                            <div className="col-start-2">
+                            <div className="col-span-2 md:col-start-2">
                               <FormField name='phoneNumber' key='phoneNumber' render={() => (
                                 <FormItem>
                                   <FormLabel className="gap-0 font-sans text-sm">
